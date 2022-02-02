@@ -51,3 +51,14 @@
     box-shadow: 1px 1px 1px rgba(0,0,0,.3);
 }
 
+.back{
+    transform: rotateY(180deg);
+}
+
+.card:hover .back{
+    transform: rotateY(0deg);
+}
+
+.card:hover .front{
+    transform: rotateY(-180deg);
+}
