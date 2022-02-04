@@ -44,7 +44,7 @@
     position: absolute;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    transition: all .5s;
+    transition: all 500ms;
     transform-style: preserve-3d;
 
     border-radius: 10px;
