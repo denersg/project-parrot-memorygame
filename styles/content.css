@@ -55,10 +55,10 @@
     transform: rotateY(180deg);
 }
 
-.card:hover .back{
+.upturned-card .back{
     transform: rotateY(0deg);
 }
 
-.card:hover .front{
+.upturned-card .front{
     transform: rotateY(-180deg);
 }
