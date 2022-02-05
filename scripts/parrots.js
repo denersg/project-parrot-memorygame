@@ -13,6 +13,8 @@
 
 // numberOfCards = prompt("Com quantas cartas deseja começar? [escolha números pares entre 4 e 14]");
 let numberOfCardsChosen, numberOfCardsAllowed = false;
+let card1, card2, hitTwoCards = 0;
+
 const cards = [
     "./images/bobrossparrot.gif",
     "./images/explodyparrot.gif",
@@ -36,20 +38,38 @@ const cards = [
 //     }
 // }
 
+function turnDown(){
+    card1.classList.remove("upturned-card");
+    card2.classList.remove("upturned-card");
+
+    card1 = undefined;
+    card2 = undefined;
+}
+
 function turnCardFaceUp(pressedCard){
     /*Se a carta já está virada, quer dizer que não preciso virá-la
-     *novamente. Então, eu saio da função, pois não
-     *faz sentido continuar a virar uma carta já virada.*/
+     *novamente.*/
     const alreadyTurned = pressedCard.classList.contains("upturned-card");
     // console.log(alreadyTurned)
     if(alreadyTurned){
         return;
     }
 
+    /*As duas primeiras cartas tem que ser viradas corretamente
+      para então o jogador poder prosseguir.*/
+    if( (card1 !== undefined) && (card2 !== undefined) ){
+        return;
+    }
+
     pressedCard.classList.add("upturned-card");
+
+    
+
+
+
 }
 
-function comparator() { 
+function comparator() {
 	return Math.random() - 0.5; 
 }
 
