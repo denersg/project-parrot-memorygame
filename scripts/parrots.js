@@ -1,11 +1,12 @@
 /* ####### ANOTAÇÕES DO CÓDIGO #######
 # 
-# As funções do jogo foram criadas de baixo para cima, sendo as das últimas linhas as primeiras a serem executadas.
+# As funções do jogo foram criadas de baixo para cima, sendo as funções mais inferiores as primeiras a serem executadas e as mais superiores, as últimas.
 # A lógica das funções funciona assim:
-# 
-# 1. A primeira função a ser chamada cria o esqueleto que vai acomodar a lista de cartas.
-# 2. Ao executar a função que vai comportar as cartas, em seguida é chamada a próxima função que vai validar a escolha do usuário.
-# 3.
+#   
+#   1. Todas as variáveis globais foram declaradas no início.
+#   2. A primeira função a ser chamada cria o esqueleto que vai acomodar a lista de cartas.
+#   3. Ao executar a função que vai comportar as cartas, em seguida é chamada a próxima função que vai validar a escolha do usuário.
+#   4.
 
   O jogo funciona da seguinte forma:
   1. 
@@ -39,7 +40,11 @@ const cards = [
 // }
 
 function endGame(){
-    
+    // console.log("Cartas escolhidas: "+numberOfCardsChosen)
+    // console.log("Acertos: "+hitTwoCards)
+    if( (numberOfCardsChosen/2) == hitTwoCards ){
+        alert(`Você ganhou em ${computePlays} jogadas!`);
+    }
 }
 
 
