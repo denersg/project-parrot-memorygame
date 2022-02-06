@@ -55,13 +55,13 @@ function turnCardFaceUp(pressedCard){
         return;
     }
 
+    pressedCard.classList.add("upturned-card");
+
     /*As duas primeiras cartas tem que ser viradas corretamente
       para então o jogador poder prosseguir.*/
     if( (card1 !== undefined) && (card2 !== undefined) ){
         return;
     }
-
-    pressedCard.classList.add("upturned-card");
 
     
 
