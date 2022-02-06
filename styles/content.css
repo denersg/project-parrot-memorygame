@@ -40,7 +40,7 @@
     a gente insere essa linha para q/ não seja mostrada as duas
     faces da carta (frente e verso) ao mesmo tempo. Assim,
     a gente garante q/ quando formos clicar na carta, ela não
-    fique bugada. */
+    fique bugada.*/
     position: absolute;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;

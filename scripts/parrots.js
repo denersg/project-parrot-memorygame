@@ -13,7 +13,7 @@
 
 // numberOfCards = prompt("Com quantas cartas deseja começar? [escolha números pares entre 4 e 14]");
 let numberOfCardsChosen, numberOfCardsAllowed = false;
-let card1, card2, hitTwoCards = 0;
+let card1, card2, hitTwoCards = 0, computePlays = 0;
 
 const cards = [
     "./images/bobrossparrot.gif",
@@ -38,6 +38,17 @@ const cards = [
 //     }
 // }
 
+function endGame(){
+    
+}
+
+
+
+
+function resetCards(){
+    return(card1 = card2 = undefined);
+}
+
 function turnDown(){
     card1.classList.remove("upturned-card");
     card2.classList.remove("upturned-card");
@@ -55,19 +66,27 @@ function turnCardFaceUp(pressedCard){
         return;
     }
 
-    pressedCard.classList.add("upturned-card");
-
     /*As duas primeiras cartas tem que ser viradas corretamente
-      para então o jogador poder prosseguir.*/
+      para então o jogador poder clicar em outras.*/
     if( (card1 !== undefined) && (card2 !== undefined) ){
         return;
     }
 
+    /*Se o jogador passou pelas duas verificações acima e não
+      entrou nelas, então a atual carta é a 3ª. Significa que
+      posso inserir a classe de virar e contabilizar a jogada.*/
+    computePlays++;
+    console.log(computePlays)
+    pressedCard.classList.add("upturned-card");
+
+    //Identifica se é a 1ª carta
     if(card1 === undefined){
         card1 = pressedCard;
         return;
     }
 
+    /*Como já foi definida a 1ª carta, a 2ª é estabelecida
+      automaticamente*/
     card2 = pressedCard;
 
     
@@ -79,12 +98,19 @@ function turnCardFaceUp(pressedCard){
           sem dar tempo para que o jogador veja qual carta ele havia
           virado. Então, efetuo um atraso de alguns milissegundos
           para dar tempo do jogador ver qual carta foi clicada.*/
-        setTimeout(turnDown, 700);
+        setTimeout(turnDown, 1000);
         return;
     }
+    /*Se o conteúdo das cartas forem iguais, o jogador vai ter
+      acertado.*/
+    hitTwoCards++;
+    /*Se ambas as cartas forem viradas corretamente, elas serão
+      resetadas para que o jogador possa virar as demais.*/
+    resetCards();
 
 
 
+    endGame();
 }
 
 function comparator() {
