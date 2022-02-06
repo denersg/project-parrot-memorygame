@@ -63,7 +63,25 @@ function turnCardFaceUp(pressedCard){
         return;
     }
 
+    if(card1 === undefined){
+        card1 = pressedCard;
+        return;
+    }
+
+    card2 = pressedCard;
+
     
+    /*Se o conteúdo (imagem) de ambas as cartas forem diferentes,
+      eu preciso chamar uma função para virar elas de volta para
+      baixo.*/
+    if(card1.innerHTML !== card2.innerHTML){
+        /*Apenas chamar a função fará a carta virar instantâneamente,
+          sem dar tempo para que o jogador veja qual carta ele havia
+          virado. Então, efetuo um atraso de alguns milissegundos
+          para dar tempo do jogador ver qual carta foi clicada.*/
+        setTimeout(turnDown, 700);
+        return;
+    }
 
 
 
