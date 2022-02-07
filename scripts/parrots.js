@@ -200,11 +200,11 @@ function buildMemoryGame(){
     boxOfCards.innerHTML = "";
     for(let i = 0; i < cardShown.length; i++){
         boxOfCards.innerHTML += `
-            <li class="card" onclick="turnCardFaceUp(this)">
-                <div class="front template">
+            <li class="card" data-identifier="card" onclick="turnCardFaceUp(this)">
+                <div class="front template" data-identifier="back-face">
                     <img src="./images/front.png">
                 </div>
-                <div class="back template">
+                <div class="back template" data-identifier="front-face">
                     <img src="${cardShown[i]}">
                 </div>
             </li>
