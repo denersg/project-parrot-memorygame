@@ -4,6 +4,6 @@ body{
     background-color: #eef9bf;
 }
 
-.dark-environment{
+body.dark-environment{
     background-color: #1b1b1b;
 }

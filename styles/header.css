@@ -1,5 +1,4 @@
 header{
-    /* background-color: red; */
     height: 120px;
 
     display: flex;
@@ -13,37 +12,18 @@ header{
     color: #75B79E;
 }
 
-/* header h1{
-    background-color: yellow;
-} */
-
 .kanban{
-    /* background-color: aqua; */
     display: flex;
     justify-content: center;
 }
 
 .centralizer{
-    /* background-color: orange; */
     width: 90%;
     display: flex;
     justify-content: end;
 }
 
 .counter{
-    /* background-color: white; */
-    /* position: absolute;
-    right: 50px; */
-
     font-size: 40px;
     color: royalblue;
 }
-
-
-
-/* .dark-header{
-    background-color: red;
-    transform: rotateY(360deg);
-    transition: all 2000ms;
-    transform-style: preserve-3d;
-} */

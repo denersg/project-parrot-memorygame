@@ -1,20 +1,16 @@
 .content{
-    /* background-color: royalblue; */
     width: 100%;
-    /* height: 100vh; */
 
     display: flex;
     justify-content: center;
 }
 
 .container{
-    /* background-color: greenyellow; */
     width: 872px;
-    /* height: 500px; */
     display: flex;
+    
     flex-wrap: wrap;
     justify-content: center;
-    /* justify-content: space-between; */
 
     /*O atributo 'gap' permite inserir 34px de espaço
     entre os elementos, MENOS NO ÚLTIMO.*/
@@ -22,12 +18,10 @@
 }
 
 .card{
-    background-color: hotpink;
     width: 117px;
     height: 146px;
     display: flex;
     justify-content: center;
-    /* margin-bottom: 34px; */
 }
 
 .card img{
@@ -45,10 +39,10 @@
     align-items: center;
     
     /* Para evitar problemas de compatibilidade dos navegadores,
-    a gente insere essa linha para q/ não seja mostrada as duas
+    inserimos essa linha para que não seja mostrada as duas
     faces da carta (frente e verso) ao mesmo tempo. Assim,
-    a gente garante q/ quando formos clicar na carta, ela não
-    fique bugada. */
+    garantimos que quando formos clicar na carta, ela não
+    apresente problemas. */
     position: absolute;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -73,7 +67,6 @@
 
 /* ******* Faz parte do jogo do mal ******* */
 .darkcard{
-    /* background-color: orange; */
     width: 117px;
     height: 146px;
     display: flex;

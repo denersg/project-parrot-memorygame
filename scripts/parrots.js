@@ -1,15 +1,17 @@
-/* ####### ANOTAÇÕES DO CÓDIGO #######
+/* ####### CONSIDERAÇÕES SOBRE O CÓDIGO #######
 # 
 # As funções do jogo foram criadas de baixo para cima, sendo as funções mais inferiores as primeiras a serem executadas e as mais superiores, as últimas.
-# A lógica das funções funciona assim:
+# A lógica funciona assim:
 #   
-#   1. Todas as variáveis globais foram declaradas no início.
+#   1. Todas as variáveis globais (dos 2 tipos de jogo) foram declaradas no início.
 #   2. A primeira função a ser chamada cria o esqueleto que vai acomodar a lista de cartas.
-#   3. Ao executar a função que vai comportar as cartas, em seguida é chamada a próxima função que vai validar a escolha do usuário.
-#   4.
+#   3. Ao executar a função que vai comportar as cartas, é então chamada a próxima função que vai validar a escolha do usuário.
+#   4. A função de validação fica sendo executada até que o usuário digite um valor válida.
+#   5. Depois da entrada ser validada, a contagem se inicia e o jogo é construído com base no número de cartas pedido pelo usuário.
+#   6. Todas as funções que o jogo precisar vão sendo chamadas em sequência, conforme a necessidade.
+#   7. Quando o jogo termina, é gerado um resumo em forma de alerta mostrando o desempenho do jogador.
+#   8. Se o jogador desejar, ele pode reiniciar o jogo ou parar completamente.
 
-  O jogo funciona da seguinte forma:
-  1. 
 */
 
 /******************** Variáveis do jogo do mal ********************/
@@ -50,14 +52,12 @@ const darkCards = [
     "./images/hardgame/30-winged-dragon.jpg",
 ];
 
-
-
-
 /******************** Variáveis do jogo comum ********************/
 let numberOfCardsChosen = 0, numberOfCardsAllowed = false;
 let card1, card2;
 let hitTwoCards = 0, computePlays = 0;
 let counter = document.querySelector(".counter");
+let interval = null;
 
 const cards = [
     "./images/bobrossparrot.gif",
@@ -69,171 +69,45 @@ const cards = [
     "./images/unicornparrot.gif",
 ];
 
-// function validateCards(){
-//     while(numberOfCardsAllowed == false){
-//         numberOfCards = prompt("Com quantas cartas deseja começar? [escolha números pares entre 4 e 14]");
+/***************************** FINAL DO JOGO *****************************/
+
+function finishAndNewGame(){
+    alert(`Você ganhou em ${computePlays} jogadas!\nSeu tempo foi de: ${counter.innerHTML} segundos!`);
+
+    let challengeRequest = prompt("Quer jogar novamente? [s/n]");
+
+    if(challengeRequest !== "s"){
+        clearInterval(interval);
+    }
+
+    if(challengeRequest === "s"){
+        challengeRequest = prompt("\nDeseja do jeito fácil ou do jeito difícil?\nf  -> fácil\nd -> difícil\n");
         
-//         if(numberOfCards%2 == 0){
-//             if( (numberOfCards >= 4) && (numberOfCards <= 14) ){
-//                 numberOfCardsAllowed = true;
-//                 buildMemoryGame();
-//             }
-//         }
-//     }
-// }
-
-/***********************************************************************
- ***********************************************************************
- ***************************** JOGO DO MAL *****************************
- *****                                                              ****
- ***** Este trecho não faz parte do jogo comum. Tal parte foi       **** 
- ***** idealizada única e exclisivamente para o entretenimento,     ****
- ***** visando dar ao jogador um maior desafio. Divirta-se!!!       ****
- ***********************************************************************
- ***********************************************************************
-*/
-
-function toUnderworld(){
-    darkcard1.classList.remove("upturned-card");
-    darkcard2.classList.remove("upturned-card");
-
-    darkcard1 = undefined;
-    darkcard2 = undefined;
-}
-
-function turnDarkCardFaceUp(pressedDarkCard){
-    const alreadyTurned = pressedDarkCard.classList.contains("upturned-card");
-    if(alreadyTurned){
-        return;
-    }
-
-    if( (darkcard1 !== undefined) && (darkcard2 !== undefined) ){
-        return;
-    }
-
-    computeDarkPlays++;
-    pressedDarkCard.classList.add("upturned-card");
-
-    if(darkcard1 === undefined){
-        darkcard1 = pressedDarkCard;
-        return;
-    }
-
-    darkcard2 = pressedDarkCard;
-
-    if(darkcard1.innerHTML !== darkcard2.innerHTML){
-        setTimeout(toUnderworld, 1000);
-        return;
-    }
-    
-    hitTwoDarkCards++;
-    resetCards();
-
-
-
-    // endGame();
-}
-
-function buildHellMemoryGame(){
-    let darkCardShown = [];
-
-    for(let i = 0; i < numberOfDarkCardsChosen/2; i++){
-        let saveDarkCard = darkCards[i];
-
-        darkCardShown.push(saveDarkCard);
-        darkCardShown.push(saveDarkCard);
-    }
-
-    darkCardShown = darkCardShown.sort(comparator);
-
-    const boxOfDarkCards = document.querySelector(".container");
-    
-    boxOfDarkCards.innerHTML = "";
-    for(let i = 0; i < darkCardShown.length; i++){
-        boxOfDarkCards.innerHTML += `
-            <li class="darkcard" onclick="turnDarkCardFaceUp(this)">
-                <div class="front template">
-                    <img src="./images/hardgame/0-front.png">
-                </div>
-                <div class="back template">
-                    <img src="${darkCardShown[i]}">
-                </div>
-            </li>
-        `;
-    }
-}
-
-function validateDarkCards(){
-    while(numberOfDarkCardsAllowed == false){
-        numberOfDarkCardsChosen = prompt("Com quantas cartas deseja começar? [escolha números pares entre 14 e 30]");
-        
-        if(numberOfDarkCardsChosen%2 == 0){
-            if( (numberOfDarkCardsChosen >= 14) && (numberOfDarkCardsChosen <= 30) ){
-                numberOfDarkCardsAllowed = true;
-                // chronos();
-                buildHellMemoryGame();
+        if(challengeRequest === "f"){
+            window.location.reload();
+        }
+        else if(challengeRequest === "d"){
+            challengeRequest = prompt("\nTem certeza disso? Ireis adentrar um mundo do qual não poderás escapar. \nf  -> fácil\nd -> difícil\n");
+            if(challengeRequest === "d"){
+                alert("Você foi avisado HUMANO!!! Não teremos pena de vossa alma.");
+                hellGame();
+                clearInterval(interval);
+                counter.innerHTML = 0;
+                chronos();
+                
+            }
+            if(challengeRequest !== "d"){
+                window.location.reload();
             }
         }
     }
 }
 
-function createDarkGameModel(){
-    return(`
-        <ul class="container">
-            ${validateDarkCards()}
-        </ul>
-    `);
-}
-
-function hellGame(){
-    // alert("PARABÉNS!!! Vc entrou no HELLGAME")
-    const newheader = document.querySelector("header h1");
-    newheader.innerHTML = "👹 HELL MEMORY GAME 👹";
-
-    // const newCounter = document.querySelector(".counter");
-    // newCounter.innerHTML = "Você não vai querer saber quando tempo permanecer no submundo, HUMANO. HAHAHAHA";
-
-    const hellBody = document.querySelector("body");
-    hellBody.classList.add("dark-environment");
-
-    createDarkGameModel();
-}
-
-
-
-
-
-
-/***************************** FINAL DO JOGO *****************************/
-
-function finishAndNewGame(){
-    alert(`Você ganhou em ${computePlays} jogadas! Com um tempo de ${counter.innerHTML} segundos!`);
-
-    let challengeRequest = prompt("Quer jogar novamente? [s/n]");
-
-    if(challengeRequest === "s"){
-        challengeRequest = prompt("Quer do jeito fácil ou do jeito difícil? [f/d]");
-        if(challengeRequest === "f"){
-            // numberOfCardsAllowed = false;
-            // hitTwoCards = 0, computePlays = 0;
-            // counter.innerHTML = 0;
-            // validateCards();
-            window.location.reload();
-        }
-        else if(challengeRequest === "d"){
-            hellGame();
-        }
-    }
-}
-
 function endGame(){
-    // console.log("Cartas escolhidas: "+numberOfCardsChosen)
-    // console.log("Acertos: "+hitTwoCards)
     if( (numberOfCardsChosen/2) == hitTwoCards ){
         setTimeout(finishAndNewGame, 200);
     }
 }
-
 
 /***************************** JOGO NORMAL *****************************/
 
@@ -253,7 +127,6 @@ function turnCardFaceUp(pressedCard){
     /*Se a carta já está virada, quer dizer que não preciso virá-la
      *novamente.*/
     const alreadyTurned = pressedCard.classList.contains("upturned-card");
-    // console.log(alreadyTurned)
     if(alreadyTurned){
         return;
     }
@@ -298,9 +171,6 @@ function turnCardFaceUp(pressedCard){
     /*Se ambas as cartas forem viradas corretamente, elas serão
       resetadas para que o jogador possa virar as demais.*/
     resetCards();
-
-
-
     endGame();
 }
 
@@ -329,7 +199,6 @@ function buildMemoryGame(){
     // Acessa a lista não ordenada e insere os itens
     boxOfCards.innerHTML = "";
     for(let i = 0; i < cardShown.length; i++){
-        // <li class="card upturned-card"></li>
         boxOfCards.innerHTML += `
             <li class="card" onclick="turnCardFaceUp(this)">
                 <div class="front template">
@@ -343,16 +212,13 @@ function buildMemoryGame(){
     }
 }
 
-
-// counter = document.querySelector(".counter");
-
 function increaseTime(){
     counter.innerHTML = parseInt(counter.innerHTML) + 1;
 }
 
 
 function chronos(){
-    setInterval(increaseTime, 1000);
+    interval = setInterval(increaseTime, 1000);
 }
 
 function validateCards(){
@@ -378,3 +244,131 @@ function createGameModel(){
 }
 
 createGameModel();
+
+
+/***********************************************************************
+ ***********************************************************************
+ ***************************** JOGO DO MAL *****************************
+ *****                                                              ****
+ ***** Este trecho não faz parte do jogo comum. Tal parte foi       **** 
+ ***** idealizada única e exclisivamente para o entretenimento,     ****
+ ***** visando dar ao jogador um maior desafio. Divirta-se!!!       ****
+ ***********************************************************************
+ ***********************************************************************
+*/
+
+function congratulationsMessage(){
+    alert("PARABÉNS HUMANO!!!\n\n"+
+    "Acabastes com o teu pesadelo e por isso, ganhastes o direito de sair do submundo.\n"+
+    "Façais melhores escolhas da próxima vez, pois..... estaremos TE VIGIANDO 👹");
+
+    window.location.reload();
+}
+
+function endNightmare(){
+    if( (numberOfDarkCardsChosen/2) == hitTwoDarkCards ){
+        setTimeout(congratulationsMessage, 200);
+    }
+}
+
+function resetDarkCards(){
+    return(darkcard1 = darkcard2 = undefined);
+}
+
+function toUnderworld(){
+    darkcard1.classList.remove("upturned-card");
+    darkcard2.classList.remove("upturned-card");
+
+    darkcard1 = undefined;
+    darkcard2 = undefined;
+}
+
+function turnDarkCardFaceUp(pressedDarkCard){
+    const alreadyTurned = pressedDarkCard.classList.contains("upturned-card");
+    if(alreadyTurned){
+        return;
+    }
+
+    if( (darkcard1 !== undefined) && (darkcard2 !== undefined) ){
+        return;
+    }
+
+    computeDarkPlays++;
+    pressedDarkCard.classList.add("upturned-card");
+
+    if(darkcard1 === undefined){
+        darkcard1 = pressedDarkCard;
+        return;
+    }
+
+    darkcard2 = pressedDarkCard;
+
+    if(darkcard1.innerHTML !== darkcard2.innerHTML){
+        setTimeout(toUnderworld, 1000);
+        return;
+    }
+    
+    hitTwoDarkCards++;
+    resetDarkCards();
+    endNightmare();
+}
+
+function buildHellMemoryGame(){
+    let darkCardShown = [];
+
+    for(let i = 0; i < numberOfDarkCardsChosen/2; i++){
+        let saveDarkCard = darkCards[i];
+
+        darkCardShown.push(saveDarkCard);
+        darkCardShown.push(saveDarkCard);
+    }
+
+    darkCardShown = darkCardShown.sort(comparator);
+
+    const boxOfDarkCards = document.querySelector(".container");
+    
+    boxOfDarkCards.innerHTML = "";
+    for(let i = 0; i < darkCardShown.length; i++){
+        boxOfDarkCards.innerHTML += `
+            <li class="darkcard" onclick="turnDarkCardFaceUp(this)">
+                <div class="front template">
+                    <img src="./images/hardgame/0-front.png">
+                </div>
+                <div class="back template">
+                    <img src="${darkCardShown[i]}">
+                </div>
+            </li>
+        `;
+    }
+}
+
+function validateDarkCards(){
+    while(numberOfDarkCardsAllowed == false){
+        numberOfDarkCardsChosen = prompt("Com quantas cartas deseja começar? [escolha números pares entre 18 e 30]");
+        
+        if(numberOfDarkCardsChosen%2 == 0){
+            if( (numberOfDarkCardsChosen >= 18) && (numberOfDarkCardsChosen <= 30) ){
+                numberOfDarkCardsAllowed = true;
+                buildHellMemoryGame();
+            }
+        }
+    }
+}
+
+function createDarkGameModel(){
+    return(`
+        <ul class="container">
+            ${validateDarkCards()}
+        </ul>
+    `);
+}
+
+function hellGame(){
+    const newheader = document.querySelector("header h1");
+    newheader.innerHTML = "👹 HELL MEMORY GAME 👹";
+
+    const hellBody = document.querySelector("body");
+    hellBody.classList.add("dark-environment");
+
+    createDarkGameModel();
+}
