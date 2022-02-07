@@ -8,7 +8,7 @@
 <h1 align="center">Parrots Card Game</h1>
 
 
-<p align="center">🦜 Um joguinho da memória para passar o tempo com papagaios simpáticos</p>
+<p align="center">🦜 Um joguinho da memória para mudar as vidas de quem está com tédio e aproveitar para passar o tempo com papagaios simpáticos</p>
 
 <hr>
 
