@@ -3,3 +3,7 @@ body{
     font-style: normal;
     background-color: #eef9bf;
 }
+
+.dark-environment{
+    background-color: #1b1b1b;
+}
