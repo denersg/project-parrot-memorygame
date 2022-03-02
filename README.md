@@ -52,10 +52,18 @@ O jogo pode ser jogado tanto na versão de computador quanto na versão para cel
 Projeto sob a licença MIT.
 
 
-# 🙍‍♂️ Autor
+## 🙍‍♂️ Autor
 
+<img width="130px" src="https://user-images.githubusercontent.com/39387376/156423766-0e52d9c7-68a8-479c-81df-2bfb59ccbb2c.png" >
+
+Desenvolvido por 
 <a href="https://www.linkedin.com/in/dener-silva-guimar%C3%A3es-380ba4232/">
-  Dener Silva Guimarães
+  Dener Silva Guimarães 🤖
 </a>
 
+Fale comigo quando quiser 😁!
+<div>
+  <a href = "https://www.linkedin.com/in/dener-silva-guimar%C3%A3es-380ba4232/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+  <a href = "mailto: dener.s.guimaraes@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+</div>
 
