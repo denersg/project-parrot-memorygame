@@ -18,7 +18,7 @@
 
 ## 📜 Sobre o projeto
 
-O projeto foi feito tendo em mente a criação de um jogo da memória bem simples, onde o objetivo é virar todos os pares de cartas para cima no menos tempo possível. As funcionalidades do jogo foram implementadas usando JavaScript e um pouco de CSS.
+O projeto foi feito tendo em mente a criação de um jogo da memória bem simples, onde o objetivo é virar todos os pares de cartas para cima no menor tempo possível. As funcionalidades do jogo foram implementadas usando JavaScript e um pouco de CSS.
 
 ## 📋 Features
 
