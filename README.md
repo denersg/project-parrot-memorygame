@@ -14,6 +14,8 @@
   <img src="https://img.shields.io/github/repo-size/denersg/project-parrot-memorygame?style=for-the-badge">
   <img src="https://img.shields.io/github/last-commit/denersg/project-parrot-memorygame?style=for-the-badge">
   <img src="https://img.shields.io/github/stars/denersg/project-parrot-memorygame?color=%23ffb300&style=for-the-badge">
+  <img src="https://img.shields.io/github/license/denersg/project-parrot-memorygame?style=for-the-badge">
+  
 </div>
 
 ## 📜 Sobre o projeto
